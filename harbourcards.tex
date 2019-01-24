@@ -1,0 +1,271 @@
+\documentclass[a7paper,print,10pt,grid=both]{kartei}
+\usepackage[utf8]{inputenc}
+\usepackage{aurical}
+\usepackage[english]{babel}
+\usepackage{niceframe}
+\usepackage{amssymb}
+
+\renewcommand{\antwort}{Effect}
+\renewcommand{\dieantwort}{Effect}
+
+\newcommand{\entry}[2]{%
+  \vspace{0.1cm}
+  \Large{\textbf{#1:} #2} \\
+  \vspace{0.1cm}
+}
+
+\newcommand{\bonus}[1]{\entry{Bonus}{#1}}
+\newcommand{\requires}[1]{\entry{Requirs}{#1}}
+\newcommand{\malus}[1]{\entry{Penalty}{#1}}
+\newcommand{\dc}[2]{\entry{#1 DC}{#2}}
+\newcommand{\success}[1]{\entry{Success}{#1}}
+\newcommand{\failure}[1]{\entry{Failure}{#1}}
+\newcommand{\ignored}[1]{\entry{Ignored}{#1}}
+
+\newcommand{\card}[4]{%
+  \begin{karte}[\textbf{#1}]{
+      \center{
+        \vspace*{-1.0cm} \textbf{#2}
+        \par
+        \vspace*{+1.0cm}
+        \small{\emph{#3}}
+        \vspace*{\fill}
+      }
+    }
+    \vspace*{\fill}
+    \center{#4}
+    \vspace*{\fill}
+  \end{karte}
+}
+
+\begin{document}
+
+% ---------- Initial cards ---------------------------
+%
+\card{NPC}{Torek the Keghauler}{%
+  One hulk of an half-orc as a bartender. Quite capable of carrying
+  hefty mugs of ale and rum, and smashing heads. But not quite so
+  pleasant on the eyes.
+}{
+  \bonus{+1 security}
+  \malus{-2 WP per week}
+}
+\card{NPC}{Anarelia the Barmaid}{
+  Anarelia was Torek's personal slave and barmaid, but is now free due
+  to Arvid's laws regarding slavery. Hard and earnest worker, if a bit
+  feisty.
+}{
+  \bonus{+1 attraction}
+  \malus{-1 WP per week}
+}
+\card{Building}{Smuggler's Tavern}{%
+  ``The landlord's a bastard, the barmaid's a whore \\
+  but give them no shit or you're straight out the door'' \\
+  -- Alestorm
+}{
+  \requires{bartender}
+  \bonus{2 WP income per week}
+  \malus{-2 stability}
+}
+\card{Building}{Simple Docks}{%
+  Perfect for smaller ships, such as boats and schooners.
+}{\bonus{2 WP income per week}}
+
+\card{Building}{Dilettantish Defences}{%
+  Hastily erected fortifications which are barely able to keep wild
+  animals from wandering into the camp.
+}{\bonus{+1 security}}
+
+\card{Building}{Small Stables}{
+  Perfect for horses and drunk cheapskates that can't afford a room.
+}{\bonus{1 WP income per week}}
+% -----------------------------------------------------------------------
+
+% ------------------- CRISIS --------------------------------------------
+% Sea incursions from the Savage Lands, and invasions
+%
+\card{Crisis}{Small Sea Incursion}{
+  A small group of orc pirates from \emph{Iâfandir} attempt to raid the
+  coast of \emph{Eilean Mor}.
+}{
+  \dc{Security}{15}
+  \success{+1 defence, 5 WP}
+  \failure{-1 defence, -5 WP}
+}
+\card{Crisis}{Sea Raid}{
+  A small group of bugbear slavers from \emph{Iâfandir} attempt to raid the
+  coast of \emph{Eilean Mor} for some new slaves to take back home.
+}{
+  \dc{Security}{20}
+  \success{+2 defence, +50 WP}
+  \failure{-2 defence, -50 WP}
+}
+\card{Crisis}{Savage Invasion}{
+  A large fleet of bugbear warriors from \emph{Iâfandir} are invading
+  and pillaging the coastal area.
+}{
+  \dc{Security}{25}
+  \success{+5 defence, +100 WP}
+  \failure{-5 defence, -100 WP}
+}
+\card{Crisis}{Lord Norello Invades}{
+  An army of Lord Norello's finest are invading the land trying to reclaim the
+  vital sea port, and the strategic location of the tavern.
+}{
+  \dc{Security}{25}
+  \failure{Subjugation beneath Norello's rule}
+}
+\card{Crisis}{Norbury Invades}{
+  You did it! You drew the ire of a city kingdom and now they want what you
+  have. The well trained navy and army of Norbury is at your doorsteps.
+}{
+  \dc{Security}{35}
+  \failure{Subjugation beneath Norbury's rule}
+}
+% ----------------------------------------------------------------------------
+
+% ---------------------- PROBLEMS --------------------------------------------
+%
+\card{Problem}{Nasty Rumour}{
+  A nasty rumour has spread about the tavern or its owners. Unless counter
+  acted it will surely keep patrons away
+}{
+  \dc{Attraction}{10}
+  \ignored{-1 attraction}
+}
+\card{Problem}{Repeated Fights}{
+  Bar fights are a common occurrence in the tavern, causing the more
+  tender patrons to stay away.
+}{
+  \dc{Stability}{10}
+  \ignored{-1 stability}
+}
+\card{Problem}{Drug Den}{
+  Drug trade and drug use has become an open secret within the tavern, giving
+  it a foul reputation.
+}{
+  \dc{Attraction}{15}
+  \ignored{-2 stability, -2 attraction}
+  \failure{-2 attraction}
+}
+\card{Problem}{Roaming Bandits}{
+  Bandits threaten the security of the land trade routes and routinely attack
+  and rob merchants.
+}{
+  \dc{Security}{15}
+  \ignored{-2 security}
+  \failure{-2 security}
+}
+\card{Problem}{Wild Beasts}{
+  Wild beasts roam the land outside the tavern, slaughtering life
+  stock and threatening both merchants and farmers.
+}{
+  \dc{Security}{13}
+  \ignored{-1 security}
+  \failure{-1 security}
+}
+\card{Problem}{Shapers of the Three Kings}{
+  Shaper creatures (were- warriors) of the Three Kings roam the
+  lands in search for blood and glory. They openly attack everyone,
+  threatening both traders and civilians.
+}{
+  \dc{Security}{22}
+  \ignored{-5 security}
+  \failure{-5 security}
+}
+\card{Problem}{Preacher of the Seas}{
+  A priest of Isamir, the beast of the seas, protests the vile defilement the
+  harbour and its ships represents towards the sea.
+}{
+  \dc{Stability}{15}
+  \ignored{-2 stability}
+}
+\card{Problem}{Pleb Unrest}{
+  The farmers, workers and inhabitants of the surrounding sea are protesting
+  their treatment beneath Lord Norello's rule, and demand security, stability
+  and lower taxes.
+}{
+  \dc{Stability}{20}
+  \ignored{All external buildings stop producing WP}
+  \ignored{-2 stability}
+  \failure{-5 stability}
+}
+
+% ----------------------------------------- NPCS --------------------------
+\card{NPC}{Lanis the Honourable Captain}{
+  Lanis, a truly honourable captain, has sailed the seas both north
+  and east of \emph{Eilean Mor}. He has been known to undertake shadier
+  dealings, but is a good earner.
+}{
+  \bonus{+5 WP per week}
+  \malus{-1 stability}
+}
+\card{NPC}{Talia of Norbury}{
+  The Norbury envoy responsible for all lands bordering the city kingdom.
+  The snow elven lady is highly charismatic, and is your diplomatic
+  link to your eastern neighbours.
+}{
+  \bonus{+4 attraction (Norbury)}
+  \bonus{-4 attraction (Arvid)}
+}
+\card{NPC}{Corporal Bertram Carpel}{
+  A human corporal from Arvid called Betram Carpel has been assigned to you
+  as an envoy to represent the security interests of Arvid.
+}{
+  \bonus{+2 stability}
+  \bonus{+2 attraction (Arvid)}
+}
+
+% ----------------------------------------- Opportunities ----------------
+\card{Opportunity}{Three Holy Sisters}{
+  Three priestess of \emph{Nyddwr} make a stop at your tavern, requesting
+  food, lodging and a place to give out readings of the past, present and
+  future. They are only staying for a few days before moving.
+}{
+  \bonus{+5 attraction}
+  \bonus{+3 stability}
+  \malus{-3 WP for their lodging}
+}
+\card{Opportunity}{Washed Ashore}{
+  Another sea raid from \emph{Iâfandir} has been crushed and sunk off the cost
+  by the \emph{Norbury} navy. Now floatsam, and perhaps a surprise, are being
+  washed ashore at the harbour.
+}{
+  \bonus{5 WP}
+  \bonus{12\% chance on finding a survivor}
+}
+\card{Opportunity}{Festival}{
+  Wandering musicians and performers have entered your tavern, and are
+  performing for your customers. They are staying for a few days before moving
+  on.
+}{
+  \bonus{+2 attraction}
+  \bonus{+2 WP}
+}
+\card{Opportunity}{Coastal Gold}{
+  Some fishermen have claimed that a particularly valuable floatsam has washed
+  ashore somewhere along the coast. Claiming it could be beneficial.
+}{
+  \dc{Security}{10}
+  \success{10 WP}
+  \failure{-1 security}
+}
+\card{Opportunity}{Coastal Treasure}{
+  Some fishermen have claimed that a particularly valuable floatsam has washed
+  ashore somewhere along the coast. Claiming it could be beneficial.
+}{
+  \dc{Security}{15}
+  \success{30 WP}
+  \failure{-2 security}
+}
+\card{Opportunity}{Costal Wealth}{
+  Some fishermen have claimed that a particularly valuable floatsam has washed
+  ashore somewhere along the coast. Claiming it could be beneficial.
+}{
+  \dc{Security}{18}
+  \success{50 WP}
+  \failure{-3 security}
+}
+
+
+\end{document}
