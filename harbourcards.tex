@@ -21,6 +21,7 @@
 \newcommand{\success}[1]{\entry{Success}{#1}}
 \newcommand{\failure}[1]{\entry{Failure}{#1}}
 \newcommand{\ignored}[1]{\entry{Ignored}{#1}}
+\newcommand{\cost}[1]{\entry{Cost}{#1}}
 
 \newcommand{\card}[4]{%
   \begin{karte}[\textbf{#1}]{
@@ -58,7 +59,7 @@
   \bonus{+1 attraction}
   \malus{-1 WP per week}
 }
-\card{Building}{Smuggler's Tavern}{%
+\card{Building I}{Smuggler's Tavern}{%
   ``The landlord's a bastard, the barmaid's a whore \\
   but give them no shit or you're straight out the door'' \\
   -- Alestorm
@@ -67,20 +68,101 @@
   \bonus{2 WP income per week}
   \malus{-2 stability}
 }
-\card{Building}{Simple Docks}{%
+\card{Building I}{Simple Docks}{%
   Perfect for smaller ships, such as boats and schooners.
 }{\bonus{2 WP income per week}}
 
-\card{Building}{Dilettantish Defences}{%
+\card{Building I}{Dilettantish Defences}{%
   Hastily erected fortifications which are barely able to keep wild
   animals from wandering into the camp.
 }{\bonus{+1 security}}
 
-\card{Building}{Small Stables}{
+\card{Building I}{Small Stables}{
   Perfect for horses and drunk cheapskates that can't afford a room.
 }{\bonus{1 WP income per week}}
 % -----------------------------------------------------------------------
 
+% ----------------------- BUILDINGS -------------------------------------
+%
+\card{Buiding II}{Harbour Café}{%
+  Upgrade the tavern to a finer establishment, that also serves out luxury
+  drink and food such as coffee, tea and fine meals.
+
+  ``Come take a drink and drown your sorrows, \\
+  and all our fears will be gone 'til tomorrow \\
+  Have no regrets, and live for the day \\
+  In Nancy's Harbour Café'' -- Alestorm
+}{
+  \cost{100 WP}
+  \requires{bartender,cook}
+  \bonus{10 WP per week}
+  \bonus{+4 attraction}
+  \bonus{+1 stability}
+}
+\card{Building II}{Brothel}{%
+  Upgrade the tavern to a whorehouse.
+
+  ``It's a den of debauchery, violence and sin.'' -- Alestorm
+}{
+  \cost{100 WP}
+  \requires{5 wenches, dedicated security}
+  \bonus{20 WP per week}
+  \bonus{+2 attraction}
+  \bonus{-4 stability}
+}
+\card{Building I}{Outlying Farm}{
+  You know own one of the outlying farms and thus get a share of the crops,
+  meat and other produce from the fertile soil of the land.
+}{
+  \cost{50 WP}
+  \bonus{5 WP per week}
+  \bonus{+1 attraction}
+}
+\card{Building I}{Upper Floor with Rooms}{
+  Upgrade the tavern with another floor, adding rooms that can be rented out
+  to patrons. Although minimal in luxury, they are more comfortable
+  than sleeping in the chairs and on tables.
+}{
+  \cost{40 WP}
+  \bonus{4 WP per week}
+}
+\card{Building I}{Wine Cellar}{
+  A wine cellar. Great for storing wines of all ages and types, as well as
+  holding secret meetings and hiding illegal things that no one should see.
+}{
+  \cost{40 WP}
+  \bonus{+2 attraction}
+  \bonus{+1 stability}
+}
+\card{Building II}{Harbour}{
+  Upgrade the docks to a proper harbour area, with cranes, loading ports and
+  additional jetties for larger ships.
+}{
+  \cost{50 WP}
+  \bonus{10 WP per week}
+  \bonus{+2 attraction}
+}
+\card{Building II}{Wooden Wall}{
+  A proper wooden wall to keep all the bastards away.
+}{
+  \cost{50 WP}
+  \bonus{+3 security}
+}
+\card{Building I}{Harbour Defences}{
+  Lookout posts and arrow towers for rudimentary defence of the harbour.
+}{
+  \cost{30 WP}
+  \requires{dedicated security}
+  \bonus{+2 security}
+}
+\card{Building I}{Brig}{
+  A small area to hold and lookup ne'er-do-wells and other criminals.
+}{
+  \cost{40 WP}
+  \requires{dedicated security}
+  \bonus{+2 security}
+  \bonus{+2 stability}
+}
 % ------------------- CRISIS --------------------------------------------
 % Sea incursions from the Savage Lands, and invasions
 %
@@ -89,6 +171,7 @@
   coast of \emph{Eilean Mor}.
 }{
   \dc{Security}{15}
+  \cost{40 WP}
   \success{+1 defence, 5 WP}
   \failure{-1 defence, -5 WP}
 }
@@ -97,6 +180,7 @@
   coast of \emph{Eilean Mor} for some new slaves to take back home.
 }{
   \dc{Security}{20}
+  \cost{80 WP}
   \success{+2 defence, +50 WP}
   \failure{-2 defence, -50 WP}
 }
@@ -105,6 +189,7 @@
   and pillaging the coastal area.
 }{
   \dc{Security}{25}
+  \cost{200 WP}
   \success{+5 defence, +100 WP}
   \failure{-5 defence, -100 WP}
 }
@@ -113,6 +198,7 @@
   vital sea port, and the strategic location of the tavern.
 }{
   \dc{Security}{25}
+  \cost{WP}{400}
   \failure{Subjugation beneath Norello's rule}
 }
 \card{Crisis}{Norbury Invades}{
@@ -120,6 +206,7 @@
   have. The well trained navy and army of Norbury is at your doorsteps.
 }{
   \dc{Security}{35}
+  \cost{WP}{1000}
   \failure{Subjugation beneath Norbury's rule}
 }
 % ----------------------------------------------------------------------------
@@ -190,6 +277,14 @@
   \ignored{-2 stability}
   \failure{-5 stability}
 }
+\card{Problem}{Scraping the Barrel}{
+  The ``good stuff'' has run out, and there is no longer any hard liquor
+  available to the patrons.
+}{
+  \dc{Stability}{13}
+  \ignored{-5 WP per week, -2 attraction}
+  \failure{-10 WP}
+}
 
 % ----------------------------------------- NPCS --------------------------
 \card{NPC}{Lanis the Honourable Captain}{
@@ -205,6 +300,7 @@
   The snow elven lady is highly charismatic, and is your diplomatic
   link to your eastern neighbours.
 }{
+  \provides{dedicated diplomacy}
   \bonus{+4 attraction (Norbury)}
   \bonus{-4 attraction (Arvid)}
 }
@@ -212,6 +308,7 @@
   A human corporal from Arvid called Betram Carpel has been assigned to you
   as an envoy to represent the security interests of Arvid.
 }{
+  \provides{dedicated security}
   \bonus{+2 stability}
   \bonus{+2 attraction (Arvid)}
 }
@@ -266,6 +363,5 @@
   \success{50 WP}
   \failure{-3 security}
 }
-
 
 \end{document}
