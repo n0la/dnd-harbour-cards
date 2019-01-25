@@ -1,8 +1,8 @@
-LATEX = harbourcards.tex
-PDF = harbourcards.pdf
+LATEX = initial-cards.tex
+PDF = $(LATEX:.tex=.pdf)
 PDFOPTS = -include-directory="kartei"
 
-${PDF}: ${LATEX}
+%.pdf: %.tex
 	pdflatex ${PDFOPTS} $<
 
 all: ${PDF}

@@ -2,26 +2,25 @@
 \usepackage[utf8]{inputenc}
 \usepackage{aurical}
 \usepackage[english]{babel}
-\usepackage{niceframe}
-\usepackage{amssymb}
 
 \renewcommand{\antwort}{Effect}
 \renewcommand{\dieantwort}{Effect}
 
 \newcommand{\entry}[2]{%
   \vspace{0.1cm}
-  \Large{\textbf{#1:} #2} \\
+  \Large{\textbf{#1:} #2}\\
   \vspace{0.1cm}
 }
 
 \newcommand{\bonus}[1]{\entry{Bonus}{#1}}
-\newcommand{\requires}[1]{\entry{Requirs}{#1}}
+\newcommand{\requires}[1]{\entry{Requires}{#1}}
 \newcommand{\malus}[1]{\entry{Penalty}{#1}}
 \newcommand{\dc}[2]{\entry{#1 DC}{#2}}
 \newcommand{\success}[1]{\entry{Success}{#1}}
 \newcommand{\failure}[1]{\entry{Failure}{#1}}
 \newcommand{\ignored}[1]{\entry{Ignored}{#1}}
 \newcommand{\cost}[1]{\entry{Cost}{#1}}
+\newcommand{\profession}[1]{\entry{Profession}{#1}}
 
 \newcommand{\card}[4]{%
   \begin{karte}[\textbf{#1}]{
@@ -29,7 +28,7 @@
         \vspace*{-1.0cm} \textbf{#2}
         \par
         \vspace*{+1.0cm}
-        \small{\emph{#3}}
+        \small{#3}
         \vspace*{\fill}
       }
     }
@@ -48,6 +47,7 @@
   hefty mugs of ale and rum, and smashing heads. But not quite so
   pleasant on the eyes.
 }{
+  \profession{bartender}
   \bonus{+1 security}
   \malus{-2 WP per week}
 }
@@ -56,59 +56,79 @@
   to Arvid's laws regarding slavery. Hard and earnest worker, if a bit
   feisty.
 }{
+  \profession{barmaid}
   \bonus{+1 attraction}
   \malus{-1 WP per week}
 }
 \card{Building I}{Smuggler's Tavern}{%
-  ``The landlord's a bastard, the barmaid's a whore \\
-  but give them no shit or you're straight out the door'' \\
+  \emph{``The landlord's a bastard, the barmaid's a whore \\
+    but give them no shit or you're straight out the door''
+  }\\
   -- Alestorm
 }{
   \requires{bartender}
   \bonus{2 WP income per week}
   \malus{-2 stability}
 }
-\card{Building I}{Simple Docks}{%
+\card{Building I}{Simple Docks}{
   Perfect for smaller ships, such as boats and schooners.
-}{\bonus{2 WP income per week}}
-
-\card{Building I}{Dilettantish Defences}{%
+}{
+  \bonus{2 WP income per week}
+}
+\card{Building I}{Dilettantish Defences}{
   Hastily erected fortifications which are barely able to keep wild
   animals from wandering into the camp.
-}{\bonus{+1 security}}
-
+}{
+  \bonus{+1 security}
+}
 \card{Building I}{Small Stables}{
   Perfect for horses and drunk cheapskates that can't afford a room.
-}{\bonus{1 WP income per week}}
+}{
+  \bonus{1 WP income per week}
+}
 % -----------------------------------------------------------------------
 
 % ----------------------- BUILDINGS -------------------------------------
 %
-\card{Buiding II}{Harbour Café}{%
-  Upgrade the tavern to a finer establishment, that also serves out luxury
-  drink and food such as coffee, tea and fine meals.
-
-  ``Come take a drink and drown your sorrows, \\
-  and all our fears will be gone 'til tomorrow \\
-  Have no regrets, and live for the day \\
-  In Nancy's Harbour Café'' -- Alestorm
+\card{Building II}{Harbour Café}{
+  Upgrade the tavern to provide finer meals and drinks, such as tea, coffee.\\
+  \vspace{1cm}
+  \emph{``Come take a drink and drown your sorrows, \\
+    and all our fears will be gone 'til tomorrow \\
+    Have no regrets, and live for the day \\
+    In Nancy's Harbour Café''
+  }\\
+  -- Alestorm
 }{
   \cost{100 WP}
-  \requires{bartender,cook}
+  \requires{bartender and cook}
   \bonus{10 WP per week}
   \bonus{+4 attraction}
   \bonus{+1 stability}
 }
-\card{Building II}{Brothel}{%
-  Upgrade the tavern to a whorehouse.
-
-  ``It's a den of debauchery, violence and sin.'' -- Alestorm
+\card{Building II}{Brothel}{
+  Upgrade the tavern to a whorehouse.\\
+  \vspace{1cm}
+  \emph{``It's a den of debauchery, violence and sin.''} \\
+  -- Alestorm
 }{
   \cost{100 WP}
-  \requires{5 wenches, dedicated security}
-  \bonus{20 WP per week}
-  \bonus{+2 attraction}
-  \bonus{-4 stability}
+  \requires{5 wenches, dedicated security, \emph{Upper Floor With Rooms}}
+  \bonus{20 WP per week, +2 attraction}
+  \malus{-4 stability}
+}
+\card{Building II}{Pirate Haven}{
+  Let's drop all pretense: your tavern is a safe haven for pirates, cut-throats
+  and ne'er-do-wells from all corners of Aror.\\
+  \vspace{1cm}
+  \emph{``Death-sworn, oath-bound, no gods shall be our masters\\
+    we sail to the halls of doom with a black flag raised in the sky''
+  }\\ -- Alestorm
+}{
+  \cost{100 WP}
+  \requires{\emph{Harbour}}
+  \bonus{30 WP per week, +2 attraction (criminal activity)}
+  \malus{-2 stability, -2 attraction (honest dealings)}
 }
 \card{Building I}{Outlying Farm}{
   You know own one of the outlying farms and thus get a share of the crops,
@@ -117,6 +137,14 @@
   \cost{50 WP}
   \bonus{5 WP per week}
   \bonus{+1 attraction}
+}
+\card{Building I}{Hunter's Lodge}{
+  A hunter's lodge (complete with capable hunters) provides fresh meat for
+  the tavern, as well as selling off furs and hide for extra profit. The hunters
+  also aid in fending off dangerous animals and beasts.
+}{
+  \cost{30 WP}
+  \bonus{5 WP per week, +1 security against beasts}
 }
 \card{Building I}{Upper Floor with Rooms}{
   Upgrade the tavern with another floor, adding rooms that can be rented out
@@ -162,6 +190,14 @@
   \requires{dedicated security}
   \bonus{+2 security}
   \bonus{+2 stability}
+}
+\card{Building I}{Slaver's Market}{
+  A stock and market place to sell and purchase slaves.
+}{
+  \cost{30 WP}
+  \requires{dedicated slaver, dedicated security}
+  \bonus{5 WP per week, +4 attraction (Norbury)}
+  \malus{-1 stability, -4 attraction (Arvid)}
 }
 % ------------------- CRISIS --------------------------------------------
 % Sea incursions from the Savage Lands, and invasions
@@ -285,14 +321,31 @@
   \ignored{-5 WP per week, -2 attraction}
   \failure{-10 WP}
 }
-
+\card{Problem}{Terror of the Seas}{
+  Some sort of aquatic creatures are threating smaller boats and schooners.
+}{
+  \dc{Security}{13}
+  \ignored{-10 WP per week, -4 attraction}
+  \failure{-20 WP}
+}
 % ----------------------------------------- NPCS --------------------------
 \card{NPC}{Lanis the Honourable Captain}{
   Lanis, a truly honourable captain, has sailed the seas both north
   and east of \emph{Eilean Mor}. He has been known to undertake shadier
   dealings, but is a good earner.
 }{
+  \profession{security}
+  \bonus{+3 WP per week}
+  \malus{-1 stability}
+}
+\card{NPC}{Two Sisters}{
+  The twin Gorgon sisters Lina and Mina, which you rescued from the
+  Lord Norello's prison, and allowed to continue their business from
+  your harbour.
+}{
+  \profession{slaver and security}
   \bonus{+5 WP per week}
+  \bonus{+2 security}
   \malus{-1 stability}
 }
 \card{NPC}{Talia of Norbury}{
@@ -300,7 +353,7 @@
   The snow elven lady is highly charismatic, and is your diplomatic
   link to your eastern neighbours.
 }{
-  \provides{dedicated diplomacy}
+  \profession{diplomat}
   \bonus{+4 attraction (Norbury)}
   \bonus{-4 attraction (Arvid)}
 }
@@ -308,19 +361,64 @@
   A human corporal from Arvid called Betram Carpel has been assigned to you
   as an envoy to represent the security interests of Arvid.
 }{
-  \provides{dedicated security}
+  \profession{security}
   \bonus{+2 stability}
   \bonus{+2 attraction (Arvid)}
 }
-
+\card{NPC}{Katarina the Slaver}{
+  Although you have destroyed her operation and dispersed her wealth and men
+  into the winds, you have saved her from certain death by hanging. Feisty,
+  strong, but with a great disdain towards law, liberty and those weaker than
+  her.
+}{
+  \profession{security \emph{or} slaver}
+  \bonus{+4 WP per week (slaver)}
+  \bonus{+1 stability}
+  \bonus{+3 security}
+}
 % ----------------------------------------- Opportunities ----------------
+\card{Opportunity}{Wayfaerer's Post}{
+  Your tavern has been nominated to become a meeting post and save haven for
+  the Wayfaerer's Guild. Adventurers, hunters, and treasure seekers from all
+  across Aror will know where to stop if they need food, lodging and a safe
+  place to rest and heal.
+}{
+  \dc{Attraction}{20}
+  \bonus{+3 stability, +3 attraction, 40 WP}
+}
+\card{Opportunity}{A Clean Slate}{
+  Sometimes it is necessary to take drastic actions, such as removing
+  criminal elements, and quench illegal dealings. A reputation for
+  honest dealings, law-abiding business transactions and security
+  against cut throats and slavers will surely attract new customers.
+}{
+  \dc{Security}{15}
+  \cost{20 WP}
+  \bonus{+4 stability, +2 security}
+}
+\card{Opportunity}{Famous Old Spice}{
+  A captain is selling a keg of the famous old spice, a particularly strong
+  and well liked rum.
+}{
+  \cost{5 WP}
+  \bonus{+2 attraction}
+  \bonus{solves \emph{Scraping the Barrel}}
+}
+\card{Opportunity}{The House Always Wins}{
+  House \emph{Ranian} has requested to use the port and tavern as a
+  neutral meeting grounds to reconcile the differences between two
+  warring factions.
+}{
+  \dc{Attraction}{15}
+  \bonus{20 WP, +2 stability}
+}
 \card{Opportunity}{Three Holy Sisters}{
   Three priestess of \emph{Nyddwr} make a stop at your tavern, requesting
   food, lodging and a place to give out readings of the past, present and
   future. They are only staying for a few days before moving.
 }{
-  \bonus{+5 attraction}
-  \bonus{+3 stability}
+  \dc{Attraction}{10}
+  \bonus{+5 attraction, +3 stability}
   \malus{-3 WP for their lodging}
 }
 \card{Opportunity}{Washed Ashore}{
@@ -328,6 +426,7 @@
   by the \emph{Norbury} navy. Now floatsam, and perhaps a surprise, are being
   washed ashore at the harbour.
 }{
+  \dc{Security}{13}
   \bonus{5 WP}
   \bonus{12\% chance on finding a survivor}
 }
@@ -336,8 +435,8 @@
   performing for your customers. They are staying for a few days before moving
   on.
 }{
-  \bonus{+2 attraction}
-  \bonus{+2 WP}
+  \dc{Attraction}{13}
+  \bonus{+2 attraction, +2 WP}
 }
 \card{Opportunity}{Coastal Gold}{
   Some fishermen have claimed that a particularly valuable floatsam has washed
