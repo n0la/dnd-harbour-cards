@@ -6,37 +6,7 @@
 \renewcommand{\antwort}{Effect}
 \renewcommand{\dieantwort}{Effect}
 
-\newcommand{\entry}[2]{%
-  \vspace{0.1cm}
-  \Large{\textbf{#1:} #2}\\
-  \vspace{0.1cm}
-}
-
-\newcommand{\bonus}[1]{\entry{Bonus}{#1}}
-\newcommand{\requires}[1]{\entry{Requires}{#1}}
-\newcommand{\malus}[1]{\entry{Penalty}{#1}}
-\newcommand{\dc}[2]{\entry{#1 DC}{#2}}
-\newcommand{\success}[1]{\entry{Success}{#1}}
-\newcommand{\failure}[1]{\entry{Failure}{#1}}
-\newcommand{\ignored}[1]{\entry{Ignored}{#1}}
-\newcommand{\cost}[1]{\entry{Cost}{#1}}
-\newcommand{\profession}[1]{\entry{Profession}{#1}}
-
-\newcommand{\card}[4]{%
-  \begin{karte}[\textbf{#1}]{
-      \center{
-        \vspace*{-1.0cm} \textbf{#2}
-        \par
-        \vspace*{+1.0cm}
-        \small{#3}
-        \vspace*{\fill}
-      }
-    }
-    \vspace*{\fill}
-    \center{#4}
-    \vspace*{\fill}
-  \end{karte}
-}
+\include{macros}
 
 \begin{document}
 
