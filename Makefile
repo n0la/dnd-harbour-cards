@@ -1,4 +1,4 @@
-LATEX = initial-cards.tex
+LATEX = initial-cards.tex additional-cards-01.tex
 PDF = $(LATEX:.tex=.pdf)
 PDFOPTS = -include-directory="kartei"
 

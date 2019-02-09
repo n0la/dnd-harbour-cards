@@ -1,0 +1,82 @@
+\documentclass[a7paper,print,10pt,grid=both]{kartei}
+\usepackage[utf8]{inputenc}
+\usepackage{aurical}
+\usepackage[english]{babel}
+
+\renewcommand{\antwort}{Effect}
+\renewcommand{\dieantwort}{Effect}
+
+\include{macros}
+
+\begin{document}
+
+% ---------- Additional Cards --------------------
+%
+\card{NPC}{Norre the Hunter}{
+  An old but veteran werewolf hunter. He has a special distaste and hatred
+  towards feys and druids.
+}{
+  \profession{Hunter}
+  \bonus{+1 stability, +1 security against fey/druid}
+  \malus{-2 WP per week}
+}
+\card{NPC}{Tormin the Smith}{
+  The old dwarf still knows how to swing a hammer. At least, if he is sober
+  enough to hit the anvil.
+}{
+  \profession{Smith}
+  \cost{-2 WP per week}
+}
+% Supersedes the old Hunter's Lodge that didn't require a hunter
+\card{Building I}{Hunter's Lodge}{
+  A hunter's lodge provides fresh meat for the tavern, as well as
+  selling off furs and hide for extra profit. The hunters also aid in
+  fending off dangerous animals and beasts.
+}{
+  \requires{Hunter}
+  \cost{30 WP}
+  \bonus{5 WP per week, +1 security against beasts}
+}
+\card{Building I}{Forge and Steel}{
+  Simple forge and steel, to smelt and work iron or steel. Allows a dedicated
+  smith to create and repair simple items, and take care of horses that might
+  need new shoes.
+}{
+  \requires{Smith}
+  \cost{30 WP}
+  \bonus{5 WP per week, +1 stability}
+}
+\card{Building II}{Smithy}{
+  A properly stocked smithy capable of produding, repairing and
+  maintaining a wide variety of metal goods, including weapons, armour
+  and building materials.
+}{
+  \requires{Smith}
+  \cost{70 WP}
+  \bonus{10 WP per week, +1 security, +1 stability}
+}
+\card{Building III}{Arcane Workshop}{
+  Enhances the smithy to an arcane workshop, capable of forging arcane creations
+  such as golems, arcane arms and armour, as well as advanced Everblack based
+  creations.
+}{
+  \requires{Arcane Black Smith}
+  \cost{200 WP}
+  \bonus{15 WP per week, +2 security, +2 stability}
+}
+\card{Problem}{Fey Infestation}{
+  A group of fey have made the surrounding woods their home. They are harassing,
+  or even openly attacking farmers, workers and traders.
+}{
+  \dc{Security}{15}
+  \ignored{-1 security, -1 stability}
+}
+\card{Problem}{Trade Feud}{
+  Some traders have taken it upon themselves to eliminate competition. This feud
+  should be curbed in its infancy before it turns violent.
+}{
+  \dc{Stability}{15}
+  \ignored{-2 stability}
+}
+
+\end{document}
